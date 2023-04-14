@@ -36,6 +36,19 @@ def computeWordFrequencies(TokenList):
     # maps tokens and their count. Will be returned later.
     tokenCountMap = {}
 
+    # entering/updating the frequency of each word in the dictionary
+    for word in TokenList:
+        inDict = word in tokenCountMap
+        
+        # if word is not in tokenCountMap, add it to the dictionary as the first instance of it
+        if inDict == False:
+            tokenCountMap[word] = 1
+        # if word exists in tokenCountMap, update the frequency of it
+        else:
+            freq = tokenCountMap.get(word)
+            freq += 1
+            tokenCountMap[word] = freq
+
     return tokenCountMap
 
 
