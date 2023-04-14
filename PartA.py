@@ -29,14 +29,11 @@ def tokenize(textfilepath):
         for word in words:
             # check if the word is a contraction
             if (isContraction(word) == True):
-                shortenContraction(word)
-            # making all words lowercase
-            lowword = word.lower()
-            # making words in list lowercase & replacing their previous case sensitive form
-            ind = words.index(word)
-            words[ind] = lowword
+                word = shortenContraction(word)
+            # adding word to list of words
+            # additionally, making word lowercase to avoid case sensitivities
+            returnlist.append(word.lower())
 
-        returnlist += words     # update list of tokens
         currentline = f.readline()  # move onto next line
 
     f.close     # close file
