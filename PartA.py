@@ -1,6 +1,16 @@
 import sys
 import re
 
+# checks if word is a contraction
+def isContraction(word) -> bool:
+    if ("'" in word):
+        return True
+    else:
+        return False
+
+# removes apostrophe and combines into one token
+def shortenContraction(cword):
+    return cword.replace("'", "")
 
 def tokenize(textfilepath):
     # stores tokens to be returned later
@@ -17,6 +27,9 @@ def tokenize(textfilepath):
         words = re.findall(r"[a-zA-Z\'\d]+", currentline)
 
         for word in words:
+            # check if the word is a contraction
+            if (isContraction(word) == True):
+                shortenContraction(word)
             # making all words lowercase
             lowword = word.lower()
             # making words in list lowercase & replacing their previous case sensitive form
