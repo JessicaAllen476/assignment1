@@ -69,5 +69,6 @@ if __name__ == "__main__":
         tokenized = tokenize(sys.argv[1])
     except FileNotFoundError:
         print("Error: File not found.")
-    countfreq = computeWordFrequencies(tokenized)
-    printFrequencies(countfreq)
+    else:
+        countfreq = computeWordFrequencies(tokenized)
+        printFrequencies(countfreq)
