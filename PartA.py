@@ -1,12 +1,12 @@
 import re
 
 # Tokenize function #
-def tokenize(TextFilePath):
+def tokenize(textFilePath):
     # stores tokens to be returned later
     tokenReturn = []
 
     # open & read files
-    f = open(TextFilePath, 'r')
+    f = open(textFilePath, 'r')
 
     # read file line-by-line
     currentLine = f.readline()
@@ -18,13 +18,11 @@ def tokenize(TextFilePath):
         for word in words:
             # making all words lowercase
             lowWord = word.lower()
-
             # making words in list lowercase & replacing their former case sensitive forms
             ind = word.index(word)
             words[ind] = lowWord
-        
-        tokenReturn += words    # update list of tokens
 
+        tokenReturn += words    # update list of tokens
         currentLine = f.readline()  # move onto next line
 
     f.close()   # close text file
