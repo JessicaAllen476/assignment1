@@ -1,4 +1,5 @@
-from regex import re
+import sys
+import re
 
 # tokenize function #
 def tokenize(textfilepath):
@@ -51,11 +52,19 @@ def computeWordFrequencies(tokenlist):
 
 # print #
 def printFrequencies(tokencountmap) -> None:
-    # sort dictionary from most repeated to least repeated words
     # credit for sorted: https://www.freecodecamp.org/news/sort-dictionary-by-value-in-python/
-    sortMap = sorted(tokencountmap.items(), key=lambda x:x[1], reverse=True)
+    # sort dictionary alphabetically
+    sortMap = sorted(tokencountmap.items())
+    # sort dictionary from most repeated to least repeated words
+    sortMap = sorted(sortMap, key=lambda x:x[1], reverse=True)
 
     # printing each key-value pair
     for pair in sortMap:
         print("{} -> {}".format(pair[0], pair[1]))
     
+# code below will run only during PartA testing, not when PartA is imported to PartB
+if __name__ == "__main__":
+    # takes argument from command line, tokenizes it, computes word frequencies, and prints them
+    tokenized = tokenize(sys.argv[1])
+    countfreq = computeWordFrequencies(tokenized)
+    printFrequencies(countfreq)
