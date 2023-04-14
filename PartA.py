@@ -1,12 +1,12 @@
 import sys
 import re
 
-# tokenize function #
+
 def tokenize(textfilepath):
     # stores tokens to be returned later
     returnlist = []
 
-    # open & read file line by line
+    # open & read file
     f = open(textfilepath, 'r')
 
     # reading file line by line
@@ -30,7 +30,7 @@ def tokenize(textfilepath):
 
     return returnlist
 
-# computeWord function #
+
 def computeWordFrequencies(tokenlist):
     # will store key-value pairs of tokens
     returndict = {}
@@ -38,10 +38,10 @@ def computeWordFrequencies(tokenlist):
     # entering/updating the frequency of words in dictionary
     for word in tokenlist:
         indict = word in returndict
-        # if word is not in returndict, add it to dictionary as first instance
+        # if word is not in returndict, add it to dictionary as its first instance
         if indict == False:
             returndict[word] = 1
-        # if it is in the dictionary +1 to number of instances
+        # if it is in the dictionary, +1 to its number of instances
         else:
             freq = returndict.get(word)
             freq += 1
@@ -50,7 +50,7 @@ def computeWordFrequencies(tokenlist):
     return returndict
 
 
-# print #
+
 def printFrequencies(tokencountmap) -> None:
     # credit for sorted: https://www.freecodecamp.org/news/sort-dictionary-by-value-in-python/
     # sort dictionary alphabetically
@@ -61,14 +61,17 @@ def printFrequencies(tokencountmap) -> None:
     # printing each key-value pair
     for pair in sortMap:
         print("{} -> {}".format(pair[0], pair[1]))
+
     
-# code below will run only during PartA testing, not when PartA is imported to PartB
+# code below will run only run during PartA.py execution #
 if __name__ == "__main__":
     # takes argument from command line, tokenizes it, computes word frequencies, and prints them
     try:
         tokenized = tokenize(sys.argv[1])
     except FileNotFoundError:
+        # prints an error message if an invalid text file name is given at the command line
         print("Error: File not found.")
     else:
+        # if inputted correctly, executes the code
         countfreq = computeWordFrequencies(tokenized)
         printFrequencies(countfreq)
