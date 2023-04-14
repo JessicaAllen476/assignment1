@@ -20,4 +20,7 @@ def intersection(textfile1, textfile2):
 
 # code below will be executed when PartB is run #
 if __name__ == "__main__":
-    intersection(sys.argv[1], sys.argv[2])
+    try:
+        intersection(sys.argv[1], sys.argv[2])
+    except FileNotFoundError:
+        print("Error: File not found.")
