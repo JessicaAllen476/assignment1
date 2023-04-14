@@ -54,5 +54,11 @@ def computeWordFrequencies(TokenList):
 
 # print #
 def printFrequencies(TokenCountMap) -> None:
-    # sort dict
+    # sort dictionary from most repeated to least repeated words
+    # credit for sorted: https://www.freecodecamp.org/news/sort-dictionary-by-value-in-python/
+    sortMap = sorted(TokenCountMap.items(), key=lambda x:x[1], reverse=True)
+
+    # printing each key-value pair
+    for pair in sortMap:
+        print("{} -> {}".format(pair[0], pair[1]))
     
