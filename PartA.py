@@ -2,33 +2,35 @@ import re
 
 # Tokenize function #
 def tokenize(TextFilePath):
-    # list will hold tokens and be returned later
-    tokenList = []
+    # stores tokens to be returned later
+    tokenReturn = []
 
-    # open & read text file
+    # open & read files
     f = open(TextFilePath, 'r')
 
-    # reading file line by line
+    # read file line-by-line
     currentLine = f.readline()
     while currentLine:
         # find all words (including words with an apostrophe)
         # credit for regex guide: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions/Cheatsheet
-        words = re.findall(r'[\w\']+', currentLine)
+        words = re.findall(r"[\w\']+", currentLine)
 
         for word in words:
-            # making all words case insensitive
+            # making all words lowercase
             lowWord = word.lower()
-            # making words in list lowercase & replacing their former case sensitive form
-            ind = words.index(word)
+
+            # making words in list lowercase & replacing their former case sensitive forms
+            ind = word.index(word)
             words[ind] = lowWord
-            
-        tokenList += words          # update list of tokens
+        
+        tokenReturn += words    # update list of tokens
 
-        currentLine = f.readline()  # moved onto next line
+        currentLine = f.readline()  # move onto next line
 
-    f.close()   # closes textfile
+    f.close()   # close text file
 
-    return tokenList
+    return tokenReturn
+
 
 
 # computeWordFrequencies #
