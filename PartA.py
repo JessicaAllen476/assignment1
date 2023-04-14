@@ -1,6 +1,10 @@
 import sys
 import re
 
+''' 
+Time complexity: O(n) - the function will run slower as the number of characters in the string being parsed increase due to 
+the in operator.
+'''
 # checks if word is a contraction
 def isContraction(word) -> bool:
     if ("'" in word):
@@ -8,11 +12,20 @@ def isContraction(word) -> bool:
     else:
         return False
 
+
+'''
+Time complexity: O(n) - the function will run slower as the number of characters in the string increase
+'''
 # removes apostrophe and combines into one token
-def shortenContraction(cword):
+def shortenContraction(cword) -> str:
     return cword.replace("'", "")
 
-def tokenize(textfilepath):
+
+'''
+Time complexity: O(n^2) - For each iteration through the file's lines, there exists another iteration through each word of that line.
+Therefore causing this function's time complexity to run in O(n^2).
+'''
+def tokenize(textfilepath) -> list:
     # stores tokens to be returned later
     returnlist = []
 
@@ -27,21 +40,24 @@ def tokenize(textfilepath):
         words = re.findall(r"[a-zA-Z\'\d]+", currentline)
 
         for word in words:
-            # check if the word is a contraction
+            # check if the word is a contraction, if so remove apostrophe
             if (isContraction(word) == True):
                 word = shortenContraction(word)
-            # adding word to list of words
+            # add word to list of words
             # additionally, making word lowercase to avoid case sensitivities
             returnlist.append(word.lower())
 
         currentline = f.readline()  # move onto next line
 
-    f.close     # close file
+    f.close()     # close file
 
     return returnlist
 
-
-def computeWordFrequencies(tokenlist):
+'''
+Time Complexity: O(n) - For every word in the list of tokens, only one iteration of code will be run over it.
+Therefore, as the size of the tokens list increases, the program will run slower.
+'''
+def computeWordFrequencies(tokenlist) -> dict:
     # will store key-value pairs of tokens
     returndict = {}
 
@@ -60,7 +76,11 @@ def computeWordFrequencies(tokenlist):
     return returndict
 
 
-
+'''
+Time Complexity: O(n log n) - each token in the token map will be sorted by dividing the map up 
+multiple times and comapring entry pairs before mergeing the map again. As a result, this function runs
+in quasilinear time relative to the size of the input token map.
+'''
 def printFrequencies(tokencountmap) -> None:
     # credit for sorted: https://www.freecodecamp.org/news/sort-dictionary-by-value-in-python/
     # sort dictionary alphabetically
