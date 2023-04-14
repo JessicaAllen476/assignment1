@@ -12,9 +12,9 @@ def tokenize(textfilepath):
     # reading file line by line
     currentline = f.readline()
     while currentline:
-        # find all words (including words with an apostrophe)
+        # captures all words with alphanumeric characters, including words with apostrophes
         # credit for regex guide: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions/Cheatsheet
-        words = re.findall(r"[\w\']+", currentline)
+        words = re.findall(r"[a-zA-Z\'\d]+", currentline)
 
         for word in words:
             # making all words lowercase
@@ -65,6 +65,9 @@ def printFrequencies(tokencountmap) -> None:
 # code below will run only during PartA testing, not when PartA is imported to PartB
 if __name__ == "__main__":
     # takes argument from command line, tokenizes it, computes word frequencies, and prints them
-    tokenized = tokenize(sys.argv[1])
+    try:
+        tokenized = tokenize(sys.argv[1])
+    except FileNotFoundError:
+        print("Error: File not found.")
     countfreq = computeWordFrequencies(tokenized)
     printFrequencies(countfreq)
