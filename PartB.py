@@ -10,20 +10,9 @@ def intersection(textfile1, textfile2):
     # finding the intersection
     # credit: https://docs.python.org/2/library/sets.html
     returnlist = set(tfile1).intersection(tfile2)
-    printCommonWords(returnlist)
 
     # return the number of intersecting words
     return len(returnlist)
-
-# printing out intersecting words #
-def printCommonWords(intersectionset) -> None:
-    print("Common words:")
-    # sorting list alphabetically
-    sortlist = sorted(intersectionset)
-    # printing out list of intersecting words
-    for word in sortlist:
-        print(word)
-    print("\n")
 
 # print out intersection #
 def printIntersectionNum(numintersecting):
